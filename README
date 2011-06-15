@@ -3,7 +3,8 @@ rtflib -- A Python bridge to writing RTFs.
 Dependencies:
 Almost none (except Python, of course).
 
-Configuration:
-As is, the module can be accessed by any other file in the same directory.  To add it to the global Python path, type this in the Python command-line interpreter:
-import sys
-sys.path.append("THE FILEPATH TO rtflib.py")
+Documentation:
+Check the comment in the source file for documentation.
+
+Troubleshooting:
+If you are getting an ImportError, make sure that the module is in a place where it can be seen (ie. add it to the PYTHONPATH).
