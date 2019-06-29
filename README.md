@@ -1,4 +1,4 @@
-### Very deprecated. I wrote this about 10 years ago in middle school. Would not recommend using except in extremely basic use cases.
+### Have not supported this in 8+ years, since I was in middle school. Still, I believe it should get the trick done in simple use cases.
 
 
 rtflib -- A Python bridge to writing RTFs.
