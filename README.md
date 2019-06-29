@@ -1,3 +1,6 @@
+### Very deprecated. I wrote this about 10 years ago in middle school. Would not recommend using.
+
+
 rtflib -- A Python bridge to writing RTFs.
 
 Dependencies:
