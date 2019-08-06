@@ -8,9 +8,9 @@ A lightweight Python library for exporting RTFs.
 ```python
 from rtflib import Color, RTF
 
-file = RTF("helloworld.rtf")
-file.startfile()
-file.addstrict()
-file.addtext("hello world", color=Color(255,0,0))
-file.writeout()
+rtf = RTF("helloworld.rtf")
+rtf.startfile()
+rtf.addstrict()
+rtf.addtext("hello world", color=Color(255,0,0))
+rtf.writeout()
 ```
