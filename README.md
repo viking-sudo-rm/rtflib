@@ -1,13 +1,16 @@
-### Have not supported this in 8+ years, since I was in middle school. Still, I believe it should get the trick done in simple use cases.
+# rtflib
+A lightweight Python library for exporting RTFs.
 
+**Have not supported this in 8+ years, since I was in middle school. Still, I believe it should get the trick done in simple use cases.**
 
-rtflib -- A Python bridge to writing RTFs.
+## Example usage
 
-Dependencies:
-Almost none (except Python, of course).
+```python
+from rtflib import Color, RTF
 
-Documentation:
-Check the comment in the source file for documentation.
-
-Troubleshooting:
-If you are getting an ImportError, make sure that the module is in a place where it can be seen (ie. add it to the PYTHONPATH).
+file = RTF("helloworld.rtf")
+file.startfile()
+file.addstrict()
+file.addtext("hello world", color=Color(255,0,0))
+file.writeout()
+```
