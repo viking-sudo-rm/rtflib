@@ -89,7 +89,7 @@ class Table:
 				if cell.format and cell.format.underline: self.__rtfcode__ += "\\ulnone "
 				if cell.format in dir(cell) and cell.format.bold: self.__rtfcode__ += "\\b0 "
 				if cell.format and cell.format.italicized: self.__rtfcode__ += "\\i0 "
-				if "__cid__" in dir(cell): self.__rtfcode__ += "\\cf0 \ "
+				if "__cid__" in dir(cell): self.__rtfcode__ += r"\\cf0 \ "
 			self.__rtfcode__ += "\\row\n"
 
 #object for row of a table
@@ -105,7 +105,7 @@ class Line:
 	"""line of text object"""
 	def __init__(self,text,color=None,format=None):
 		self.format = format
-		self.text = text.replace("\n","\\\n\ ")
+		self.text = text.replace("\n",r"\\\n\ ")
 		self.__element__ = "line"
 		self.color = color; self.__cid__ = None
 		self.__rtfcode__ = self.text
@@ -148,10 +148,10 @@ class RTF:
 			raise ElementError("invalid element: '" + repr(element) + "'")
 	def writeout(self):	
 		wf = open(self.name,"w")
-		wf.write("{\n")
+		wf.write("{")
 		for preelement in self.preelements:
 			wf.write(render(preelement) + "\n")
-		wf.write("{\n")
+		wf.write("{")
 		wf.write("\\colortbl;\n")
 		for color in self.colors:
 			wf.write("\\red" + str(color[0]) + "\\green" + str(color[1]) + "\\blue" + str(color[2]) + ";\n")
@@ -167,6 +167,14 @@ class RTF:
 			if element.format in dir(element) and element.format.bold: wf.write("\\b0 ")
 			if element.format and element.format.italicized: wf.write("\\i0 ")
 			if element.format: wf.write("\\fs24 ")
-			if "__cid__" in dir(element): wf.write("\\cf0 \ ")
+			if "__cid__" in dir(element): wf.write(r"\cf0 \ ")
 		wf.write("}")
 		wf.close()
+
+if __name__ == "__main__":
+	file = RTF("helloworld.rtf")
+	file.startfile()
+	file.addstrict()
+	file.addtext("hello world", color=Color(255,0,0))
+	#file.addelement((Table(color=Color(255,255,0))))
+	file.writeout()
