@@ -47,7 +47,7 @@ class RtfCode(RtfElement):
         return self.code
 
 
-class Line:
+class Line(RtfElement):
     """Represents a line of text"""
 
     def __init__(self, text, color=None, format=None):
@@ -74,7 +74,7 @@ class Line:
         return code
 
 
-class Rtf(RtfCode):
+class Rtf(RtfElement):
     """RTF file object"""
 
     def __init__(self):
