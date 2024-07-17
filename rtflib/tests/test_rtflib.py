@@ -16,6 +16,8 @@ class TestRtflib(unittest.TestCase):
 
     def test_hello_world_red(self):
         rtf = Rtf()
+        page_orientation = RtfCode(Page_layouts["A4_landscape"])
+        rtf.preelements.append(page_orientation)
         rtf.add(Line("hello world", color=Color(255, 0, 0)))
         with open(os.path.join(self.path, "helloworld-red.rtf")) as fh:
             self.assertEqual(rtf.rtf_code.strip(), fh.read())

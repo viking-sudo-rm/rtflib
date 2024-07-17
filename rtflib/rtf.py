@@ -110,7 +110,7 @@ class Rtf(RtfElement):
         code = "{\\rtf1\\ansi\\deff0\n"
 
         for preelement in self.preelements:
-            code + preelement.rtf_code + "\n"
+            code += preelement.rtf_code + "\n"
 
         if self.colors:
             code += "{\n"

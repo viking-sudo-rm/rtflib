@@ -6,6 +6,10 @@ class Color:
         self.green = g
         self.blue = b
 
+Page_layouts = {"A4_portrait": "\\pgwsxn11906\\pghsxn16838\\marglsxn720\\margrsxn720\\margtsxn720\\margbsxn720",
+			    "A4_landscape": "\\lndscpsxn\\pgwsxn16838\\pghsxn11906\\marglsxn720\\margrsxn720\\margtsxn720\\margbsxn720",
+				"Letter_portrait": "\\pgwsxn12240\\pghsxn15840\\marglsxn720\\margrsxn720\\margtsxn720\\margbsxn720",
+				"Letter_landscape": "\\lndscpsxn\\pgwsxn15840\\pghsxn12240\\marglsxn720\\margrsxn720\\margtsxn720\\margbsxn720"}
 
 class Format:
     """Object for format (bold, underline, etc.) of text"""
