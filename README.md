@@ -42,7 +42,7 @@ rtf.save("rtflib/tests/table.rtf")
 
 From the root of the repository, run:
 
-```python
+```shell
 pytest
 ```
 
