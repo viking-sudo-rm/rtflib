@@ -10,11 +10,12 @@ class Color:
 class Format:
     """Object for format (bold, underline, etc.) of text"""
 
-    def __init__(self, bold=False, underline=False, italicized=False, size=24):
+    def __init__(self, bold=False, underline=False, italicized=False, strike=False, size=24):
         self.bold = bold
         self.underline = underline
         self.italicized = italicized
         self.size = size
+        self.strikethrough = strike
     
     @property
     def code_prefix(self) -> str:
@@ -25,7 +26,9 @@ class Format:
             code += "\\b "
         if self.italicized:
             code += "\\i "
-        code += "\\fs" + str(self.format.size) + " "
+        if self.strikethrough:
+            code += "\\strike "
+        code += f"\\fs{str(self.size)} "
         return code
 
     @property
@@ -37,5 +40,7 @@ class Format:
             code += "\\b0 "
         if self.italicized:
             code += "\\i0 "
+        if self.strikethrough:
+            code += "\\strike0 "
         code += "\\fs24 "
         return code

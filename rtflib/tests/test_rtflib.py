@@ -3,37 +3,6 @@ import os
 
 from .. import *
 
-HELLO_WORLD = """
-{\\rtf1\\ansi\\deff0
-hello world
-}
-"""
-
-HELLO_WORLD_RED = """
-{\\rtf1\\ansi\\deff0
-{
-\\colortbl;
-\\red255\\green0\\blue0;
-}
-\\cf1 hello world\\cf0 \\ 
-}
-"""
-
-TABLE = """
-{\\rtf1\\ansi\\deff0
-here is a table:
-\\trowd\\cellx1000\\cellx2000
-\\pard\\intbl{hello}\\cell
-\\pard\\intbl{world}\\cell
-\\row
-\\trowd\\cellx1000\\cellx2000
-\\pard\\intbl{hallo}\\cell
-\\pard\\intbl{Welt}\\cell
-\\row
-
-}
-"""
-
 class TestRtflib(unittest.TestCase):
 
     def setUp(self):
@@ -49,6 +18,18 @@ class TestRtflib(unittest.TestCase):
         rtf = Rtf()
         rtf.add(Line("hello world", color=Color(255, 0, 0)))
         with open(os.path.join(self.path, "helloworld-red.rtf")) as fh:
+            self.assertEqual(rtf.rtf_code.strip(), fh.read())
+    
+    def test_hello_world_multi(self):
+        rtf = Rtf()
+        rtf.add(Line("hello world. A Line of text.\n", format=Format(bold=True,strike=True)))
+        rtf.add(Line("hello world. A Red line\n", color=Color(255, 0, 0)))
+        rtf.add(Line("hello world. A mix of "))
+        rtf.add(Line("Green ", color=Color(0, 255, 0)))
+        rtf.add(Line("and "))
+        rtf.add(Line("Red", color=Color(255, 0, 0)))
+        rtf.add(Line(" on a single line.\n"))
+        with open(os.path.join(self.path, "helloworld-multi.rtf")) as fh:
             self.assertEqual(rtf.rtf_code.strip(), fh.read())
     
     def test_table(self):
