@@ -22,7 +22,7 @@ class TestRtflib(unittest.TestCase):
     
     def test_hello_world_multi(self):
         rtf = Rtf()
-        rtf.add(Line("hello world. A Line of text.\n"))
+        rtf.add(Line("hello world. A Line of text.\n", format=Format(bold=True,strike=True)))
         rtf.add(Line("hello world. A Red line\n", color=Color(255, 0, 0)))
         rtf.add(Line("hello world. A mix of "))
         rtf.add(Line("Green ", color=Color(0, 255, 0)))
