@@ -3,57 +3,6 @@ import os
 
 from rtflib import *
 
-HELLO_WORLD = """
-{\\rtf1\\ansi\\deff0
-hello world
-}
-"""
-
-HELLO_WORLD_RED = """
-{\\rtf1\\ansi\\deff0
-{
-\\colortbl;
-\\red255\\green0\\blue0;
-}
-\\cf1 hello world\\cf0 \\ 
-}
-"""
-
-HELLO_WORLD_MULTI = """
-{\rtf1\ansi\deff0
-{
-\colortbl;
-\red255\green0\blue0;
-\red0\green255\blue0;
-}
-hello world. A Line of text.\
-\ 
-\cf1 hello world. A Red line\
-\ \cf0 \ 
-hello world. A mix of 
-\cf2 Green \cf0 \ 
-and 
-\cf1 Red\cf0 \ 
- on a single line.\
-\ 
-}
-"""
-
-TABLE = """
-{\\rtf1\\ansi\\deff0
-here is a table:
-\\trowd\\cellx1000\\cellx2000
-\\pard\\intbl{hello}\\cell
-\\pard\\intbl{world}\\cell
-\\row
-\\trowd\\cellx1000\\cellx2000
-\\pard\\intbl{hallo}\\cell
-\\pard\\intbl{Welt}\\cell
-\\row
-
-}
-"""
-
 class TestRtflib(unittest.TestCase):
 
     def setUp(self):
