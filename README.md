@@ -37,3 +37,13 @@ rtf.add(Table(
 ))
 rtf.save("rtflib/tests/table.rtf")
 ```
+
+## Running tests
+
+From the root of the repository, run:
+
+```python
+pytest
+```
+
+Tests will also be run automatically when a pull request is created.

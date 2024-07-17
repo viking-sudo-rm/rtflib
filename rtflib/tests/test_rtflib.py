@@ -1,7 +1,7 @@
 import unittest
 import os
 
-from rtflib import *
+from .. import *
 
 HELLO_WORLD = """
 {\\rtf1\\ansi\\deff0
