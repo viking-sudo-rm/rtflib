@@ -1,9 +1,9 @@
 # rtflib
 A lightweight Python library for exporting RTFs.
 
-**Have not supported this in 8+ years, since I was in middle school. Still, I believe it should get the trick done in simple use cases.**
+**I wrote this in middle school more than 10 years ago and have only lightly supported it since. Still, it could get the job done in simple use cases.**
 
-If you extend the library at all, feel free to open a pull request! Here is a [reference on RTF syntax](https://www.oreilly.com/library/view/rtf-pocket-guide/9781449302047/ch01.html).
+If you extend the library, feel free to open a pull request! Here is a [reference on RTF syntax](https://www.oreilly.com/library/view/rtf-pocket-guide/9781449302047/ch01.html) which may be helpful for adding features.
 
 ## Example usage
 
