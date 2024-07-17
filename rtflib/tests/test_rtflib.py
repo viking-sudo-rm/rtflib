@@ -41,6 +41,18 @@ class TestRtflib(unittest.TestCase):
         ))
         with open(os.path.join(self.path, "table.rtf")) as fh:
             self.assertEqual(rtf.rtf_code.strip(), fh.read())
+           
+    def test_table_widths(self):
+    rtf = Rtf()
+    data = [['apple', 121, 'selling'], ['linux', 136, 'borrowing'],
+        ['banana', 142, 'buying'], ['cherry', 137, 'borrowing'],
+        ['win2k', 147, 'in debt']]
+    table_widths = [1500,2100,4500]
+    rtf.add(Line("Here is a table with varying widths:"))
+    rows = [Row(Line(co), Line(f"{val}"), Line(state), ends=table_widths) for co,val,state in data]
+    rtf.add(Table(*rows))
+        with open(os.path.join(self.path, "table_widths.rtf")) as fh:
+            self.assertEqual(rtf.rtf_code.strip(), fh.read())
 
 if __name__ == '__main__':
     unittest.main()
