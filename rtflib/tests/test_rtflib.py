@@ -45,8 +45,8 @@ class TestRtflib(unittest.TestCase):
     def test_table_widths(self):
         rtf = Rtf()
         data = [['apple', 121, 'selling'], ['linux', 136, 'borrowing'],
-            ['banana', 142, 'buying'], ['cherry', 137, 'borrowing'],
-            ['win2k', 147, 'in debt']]
+                ['banana', 142, 'buying'], ['cherry', 137, 'borrowing'],
+                ['win2k', 147, 'in debt']]
         table_widths = [1500,2100,4500]
         rtf.add(Line("Here is a table with varying widths:\n"))
         rows = [Row(Line(co), Line(f"{val}"), Line(state), ends=table_widths) for co,val,state in data]
