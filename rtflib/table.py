@@ -52,7 +52,9 @@ class Row(RtfElement):
         
         if borders:
             self.borders = [_compose_border(borders, border_style) for idx in range(len(self.cells))]
-    
+        else:
+            self.borders = [""]*len(self.cells)
+
     @property
     def rtf_code(self) -> str:
         rtfcode = f"\\trowd{self.padding}\n"
