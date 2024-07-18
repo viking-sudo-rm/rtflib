@@ -28,7 +28,7 @@ def _compose_border(sides: str = "ltrb", style: str = "plain"):
         key = "border"
     code = ""
     for s in sides:
-        code += f"{CODE_DICT[key]["prefix"]}{s}{CODE_DICT[key]["suffix"]}"
+        code += f"{CODE_DICT[key]['prefix']}{s}{CODE_DICT[key]['suffix']}"
     return code
 
 class Row(RtfElement):
