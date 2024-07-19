@@ -37,10 +37,11 @@ class Row(RtfElement):
     See: https://stackoverflow.com/questions/8349827/using-tables-in-rtf
     """
 
-    def __init__(self, *cells: RtfElement, ends: list[int] = None, borders: str = None, border_style: str="plain", padding: str = None, pad_size: int = 144):
+    def __init__(self, *cells: RtfElement, ends: list[int] = None, borders: str = None, border_style: str="plain",
+                 cell_bg=None, padding: str = None, pad_size: int = 144):
         self.cells = cells
         self.padding = ""
-        self.borders = borders
+        #self.borders = borders
 
         if ends:
             self.ends = ends
@@ -54,12 +55,18 @@ class Row(RtfElement):
             self.borders = [_compose_border(borders, border_style) for idx in range(len(self.cells))]
         else:
             self.borders = [""]*len(self.cells)
-
+        
+        if cell_bg:
+            self.cell_bg = [f"\\clcbpat{cell_bg}" for _ in range(len(self.cells))]
+        else:
+            self.cell_bg = [""]*len(self.cells)
+            
+    
     @property
     def rtf_code(self) -> str:
         rtfcode = f"\\trowd{self.padding}\n"
-        for end, cell, border in zip(self.ends, self.cells, self.borders):
-            rtfcode += f"{border}\\cellx{end}"
+        for end, border, bg in zip(self.ends, self.borders, self.cell_bg):
+            rtfcode += f"{border}{bg}\\cellx{end}"
         rtfcode += "\n"
         for cell in self.cells:
             rtfcode += "\\pard\\intbl{" + cell.rtf_code + "}\\cell\n"

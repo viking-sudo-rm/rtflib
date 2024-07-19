@@ -105,6 +105,20 @@ class Rtf(RtfElement):
         else:
             raise ValueError(f"element '{type(element).__name__}' incompatible with RTF")
 
+    def add_color(self, red: int , green: int , blue: int ):
+        if (
+            not [red, green, blue]
+            in self.colors
+        ):
+            self.colors.append(
+                [red, green, blue]
+            )
+            return len(self.colors)
+        else:
+            return self.colors.index(
+                    [red, green, blue]
+                    ) + 1
+    
     @property
     def rtf_code(self) -> str:
         code = "{\\rtf1\\ansi\\deff0\n"
