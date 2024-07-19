@@ -1,5 +1,35 @@
 from .rtf import RtfElement, Line
 
+CODE_DICT = {
+    "padding": {"prefix": "\\trpadd", "suffix": "\\trpaddf"},
+    "border":  {"prefix": "\\clbrdr", "suffix": "\\brdrs"},
+    "dotborder":  {"prefix": "\\clbrdr", "suffix": "\\brdrdot"},
+    "dashborder":  {"prefix": "\\clbrdr", "suffix": "\\brdrdash"},
+    "doubleborder":  {"prefix": "\\clbrdr", "suffix": "\\brdrdb"}
+    }
+
+def _compose_padding(sides: str = "ltrb", size: int = 144):
+    """
+    Return padding string for row
+    """
+    code = ""
+    for s in sides:
+        code += f'{CODE_DICT["padding"]["prefix"]}{s}{size}{CODE_DICT["padding"]["suffix"]}{s}3'
+    return code
+
+def _compose_border(sides: str = "ltrb", style: str = "plain"):
+    """
+    Return border string for row
+    """
+    style_lookup = {"plain":"border", "dot":"dotborder", "dash":"dashborder", "double":"doubleborder"}
+    if style in style_lookup:
+        key = style_lookup[style]
+    else:
+        key = "border"
+    code = ""
+    for s in sides:
+        code += f'{CODE_DICT[key]["prefix"]}{s}{CODE_DICT[key]["suffix"]}'
+    return code
 
 class Row(RtfElement):
     """Row of a table
@@ -7,19 +37,29 @@ class Row(RtfElement):
     See: https://stackoverflow.com/questions/8349827/using-tables-in-rtf
     """
 
-    def __init__(self, *cells: RtfElement, ends: list[int] = None):
+    def __init__(self, *cells: RtfElement, ends: list[int] = None, borders: str = None, border_style: str="plain", padding: str = None, pad_size: int = 144):
         self.cells = cells
+        self.padding = ""
+        self.borders = borders
 
         if ends:
             self.ends = ends
         else:
             self.ends = [(idx + 1) * 1000 for idx in range(len(self.cells))]
-    
+        
+        if padding:
+            self.padding = _compose_padding(padding, pad_size)
+        
+        if borders:
+            self.borders = [_compose_border(borders, border_style) for idx in range(len(self.cells))]
+        else:
+            self.borders = [""]*len(self.cells)
+
     @property
     def rtf_code(self) -> str:
-        rtfcode = "\\trowd\n"
-        for end, cell in zip(self.ends, self.cells):
-            rtfcode += f"\\cellx{end}"
+        rtfcode = f"\\trowd{self.padding}\n"
+        for end, cell, border in zip(self.ends, self.cells, self.borders):
+            rtfcode += f"{border}\\cellx{end}"
         rtfcode += "\n"
         for cell in self.cells:
             rtfcode += "\\pard\\intbl{" + cell.rtf_code + "}\\cell\n"
