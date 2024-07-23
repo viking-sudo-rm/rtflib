@@ -128,7 +128,7 @@ class Rtf(RtfElement):
             code += "{\n"
             code += "\\colortbl;\n"
             for color in self.colors:
-                code += color.rtf_code#code += f"\\red{str(color[0])}\\green{str(color[1])}\\blue{str(color[2])};\n"
+                code += color.rtf_code
             code += "}\n"
 
         for element in self.elements:
