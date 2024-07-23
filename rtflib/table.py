@@ -41,7 +41,6 @@ class Row(RtfElement):
                  cell_bg=None, padding: str = None, pad_size: int = 144):
         self.cells = cells
         self.padding = ""
-        #self.borders = borders
 
         if ends:
             self.ends = ends

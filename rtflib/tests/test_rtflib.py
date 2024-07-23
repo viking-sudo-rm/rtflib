@@ -92,7 +92,7 @@ class TestRtflib(unittest.TestCase):
                 ['banana', 142, 'buying'], ['cherry', 137, 'borrowing'],
                 ['win2k', 147, 'in debt']]
         table_widths = [1500,2100,4500]
-        bg_cell_color = rtf.add_color(254,254,233)
+        bg_cell_color = rtf.add_color(254,254,233).cid
         row_borders = [["plain","lbrt"],["dot","lr"],["dash","lrtb"],["plain","lr"],["double","t"]]
         rtf.add(Line("Here is a table with varying widths:"))
         rows = []
