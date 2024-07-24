@@ -23,19 +23,16 @@ Format(bold=False,underline=False,intalicized=False,size=24) -- describes the te
 """
 
 from abc import ABCMeta, abstractmethod
-from collections import namedtuple
+from typing import NamedTuple, Optional
 
 from .format import *
 
+class Color(NamedTuple):
+    red: int
+    green: int
+    blue: int
+    cid: Optional[int] = 0
 
-Basecolor = namedtuple(
-            "Basecolor",
-            "red green blue cid"
-            )
-
-class Color(Basecolor):
-    """Hold a reference counted rgb color."""
-    __slots__ = ()
     @property
     def rtf_code(self):
         return f"\\red{self.red}\\green{self.green}\\blue{self.blue};\n"
@@ -112,7 +109,7 @@ class Rtf(RtfElement):
     def add(self, element: RtfElement) -> None:
         if element.iscompatible("rtf"):
             self.elements.append(element)
-            if "color" in dir(element) and element.color:
+            if hasattr(element, "color") and element.color:
                 element.color = self.add_color(element.color.red, element.color.green, element.color.blue)
         else:
             raise ValueError(f"element '{type(element).__name__}' incompatible with RTF")

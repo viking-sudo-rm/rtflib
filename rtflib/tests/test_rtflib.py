@@ -18,18 +18,18 @@ class TestRtflib(unittest.TestCase):
         rtf = Rtf()
         page_orientation = RtfCode(PAGE_LAYOUTS["A4_landscape"])
         rtf.preelements.append(page_orientation)
-        rtf.add(Line("hello world", color=Color(255, 0, 0)))
+        rtf.add(Line("hello world", color=rtf.add_color(255, 0, 0)))
         with open(os.path.join(self.path, "helloworld-red.rtf")) as fh:
             self.assertEqual(rtf.rtf_code.strip(), fh.read())
 
     def test_hello_world_multi(self):
         rtf = Rtf()
         rtf.add(Line("hello world. A Line of text.\n", format=Format(bold=True,strike=True)))
-        rtf.add(Line("hello world. A Red line\n", color=Color(255, 0, 0)))
+        rtf.add(Line("hello world. A Red line\n", color=rtf.add_color(255, 0, 0)))
         rtf.add(Line("hello world. A mix of "))
-        rtf.add(Line("Green ", color=Color(0, 255, 0)))
+        rtf.add(Line("Green ", color=rtf.add_color(0, 255, 0)))
         rtf.add(Line("and "))
-        rtf.add(Line("Red", color=Color(255, 0, 0)))
+        rtf.add(Line("Red", color=rtf.add_color(255, 0, 0)))
         rtf.add(Line(" on a single line.\n"))
         with open(os.path.join(self.path, "helloworld-multi.rtf")) as fh:
             self.assertEqual(rtf.rtf_code.strip(), fh.read())
@@ -81,18 +81,18 @@ class TestRtflib(unittest.TestCase):
         rtf.preelements.append(page_orientation)
         rtf.add(Line("hello world. A Line of text.\n"))
         rtf.add(Line("hello world. A Line of text.\n", format=Format(bold=True,strike=True,size=16)))
-        rtf.add(Line("hello world. A Red line\n", color=Color(255, 0, 0)))
+        rtf.add(Line("hello world. A Red line\n", color=rtf.add_color(255, 0, 0)))
         rtf.add(Line("hello world. A mix of "))
-        rtf.add(Line("Green ", color=Color(0, 255, 0)))
+        rtf.add(Line("Green ", color=rtf.add_color(0, 255, 0)))
         rtf.add(Line("and "))
-        rtf.add(Line("Red", color=Color(255, 0, 0)))
+        rtf.add(Line("Red", color=rtf.add_color(255, 0, 0)))
         rtf.add(Line(" on a single line.\n\n"))
         #
         data = [['apple', 121, 'selling'], ['linux', 136, 'borrowing'],
                 ['banana', 142, 'buying'], ['cherry', 137, 'borrowing'],
                 ['win2k', 147, 'in debt']]
         table_widths = [1500,2100,4500]
-        bg_cell_color = rtf.add_color(254,254,233).cid
+        bg_cell_color = rtf.add_color(254,254,233)
         row_borders = [["plain","lbrt"],["dot","lr"],["dash","lrtb"],["plain","lr"],["double","t"]]
         rtf.add(Line("Here is a table with varying widths:"))
         rows = []

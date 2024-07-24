@@ -56,7 +56,7 @@ class Row(RtfElement):
             self.borders = [""]*len(self.cells)
         
         if cell_bg:
-            self.cell_bg = [f"\\clcbpat{cell_bg}" for _ in range(len(self.cells))]
+            self.cell_bg = [f"\\clcbpat{cell_bg.cid}" for _ in range(len(self.cells))]
         else:
             self.cell_bg = [""]*len(self.cells)
             
